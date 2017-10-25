@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Cozmo</title>
+    <link type="text/css" rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <h2><center>Cozmo Security Guard</center></h2>
+    <ul>
+      <div class = "square1">
+      {% for message in message1 %}
+      You: {{message}}
+      <br/>
+        {% for split1 in message.split(' ')%}
+            {% if split1 in sent_pic%}    
+                Cozmo: Here is picture <!--function that return picture-->
+                <br/>   
+            {% elif split1 in sent_lo%}
+                Cozmo: Here is location <!--function that return location-->
+                <br/>       
+            {% endif%}     
+        {% endfor %}
+     {% endfor %}
+      </div>
+      <hr/>
+      <form action="/" method="post">
+        <div>
+          <center>
+                
+                <input type="text" name='Msg' placeholder="Message to Cozmo…" autofocus>
+                <input type="hidden">
+      
+          </center>
+          </div>
+
+        <div>
+            <center><button type="submit"> Send </button></center>
+        </div> 
+    </ul>
+  </body>
+</html>
