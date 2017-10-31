@@ -14,6 +14,10 @@ def Cozmo(name='name'):
   print(message1)   
   return render_template('cozmo.html', name=name, message1 = message1,sent_pic = sent_pic,sent_lo = sent_lo)
 
+@app.route('/list', methods=["GET", "POST"])
+def List(name='name'):
+  return render_template('list.html', name=name)
+
 @app.route('/try')
 def tried():
   return render_template('try.html')
