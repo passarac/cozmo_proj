@@ -115,4 +115,4 @@ def convert_content (content) :
     else :
         return 2 #there is an obstacle (color is yellow/ orange)
     
-cozmo.run_program(cozmo_program, use_3d_viewer=True, use_viewer=True)
+cozmo.run_program(cozmo_program, use_3d_viewer=True, use_viewer=True) #lolol
