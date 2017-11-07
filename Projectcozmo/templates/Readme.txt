@@ -1,0 +1,1 @@
+this folder cotains HTML templates for the website
