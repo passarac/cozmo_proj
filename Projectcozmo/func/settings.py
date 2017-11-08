@@ -1,0 +1,4 @@
+global faces 
+faces =  ['a']
+
+    
