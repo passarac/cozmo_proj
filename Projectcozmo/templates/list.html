@@ -4,14 +4,17 @@
   <head>
     <meta charset="utf-8">
     <title>List</title>
-    <link type="text/css" rel="stylesheet" href="/static/liststyle.css" />
+    <link type="text/css" rel="stylesheet" href="/static/lists.css" />
   </head>
   <body>
     <h2>Hello {{name}}, Welcome to my store!</h2>
     <ul>
-    	{% for item in items %}
-    	<li>{{item.name}} Price: {{item.price}}</li>
+    	{% for face in faces  %}
+    	<li> Item: {{face}}</li>
     	{% endfor %}
     </ul>
+    <form>
+      <input type="button" value="back" onclick="window.location.href='/'" />
+    </form>  
   </body>
 </html>

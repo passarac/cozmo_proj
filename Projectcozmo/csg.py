@@ -1,5 +1,8 @@
 import cozmo
 from flask import Flask, render_template, request, url_for
+from func import testfile
+import settings
+settings.genvar()
 app = Flask(__name__)
 message1=[]
 #key words for location and picture
@@ -10,13 +13,12 @@ sent_lo  = {'location','locate',}
 @app.route('/', methods=["GET", "POST"])
 def Cozmo(name='name'):
   if request.method == 'POST':
-     message1.append(request.form['Msg'])
-  print(message1)   
+     message1.append(request.form['Msg'])  
   return render_template('cozmo.html', name=name, message1 = message1,sent_pic = sent_pic,sent_lo = sent_lo)
 
 @app.route('/list', methods=["GET", "POST"])
 def List(name='name'):
-  return render_template('list.html', name=name)
+  return render_template('list.html', name=name, faces = settings.faces)
 
 @app.route('/try')
 def tried():

@@ -1,50 +1,51 @@
 import cozmo, time, asyncio
+import settings
 from cozmo.util import degrees, Pose, distance_mm, speed_mmps
 
-def cozmo_program(robot: cozmo.robot.Robot) :
+def cozmo_program(robot: cozmo.robot.Robot):  
     robot.world.request_nav_memory_map(0.5)
-    deg = 45
+    deg = 45 
     mode = 0
-    faces_memory = []
+    faces_memory = [] #create an empty list to store face id
     
-    cozmo.faces.erase_all_enrolled_faces(robot.conn)
-    robot.say_text("Remember Mode").wait_for_completed()
-    while(True): 
+    cozmo.faces.erase_all_enrolled_faces(robot.conn) 
+    robot.say_text("Remember Mode").wait_for_completed() #the first mode is remember mode which is to remember the faces of ppl
+    while(True): #infinite loop starts
         print("do the loop")
 
         try :
             print ("Check mode")
-            robot.world.wait_for_observed_light_cube(timeout=5)
+            robot.world.wait_for_observed_light_cube(timeout=5) #if a lightcube is found, the mode changes from remember mode to operational mode
             print("Found lightcube")
             if(mode == 0) :
                 mode = 1
                 print("Op")
-                robot.say_text("Operation Mode").wait_for_completed()
+                robot.say_text("Operation Mode").wait_for_completed() #cozmo says operation mode
             else :
-                mode = 0
+                mode = 0 #otherwise, the mode is back to remember mode
                 print("Re")
-                robot.say_text("Remember Mode").wait_for_completed()
+                robot.say_text("Remember Mode").wait_for_completed() #cozmo says remember mode
         except asyncio.TimeoutError :
             print("Didn't find a cube")
 
 
         if(mode == 0) :
             try :
-                print ("Do faces detection")
+                print ("Do faces detection") 
                 robot.set_head_angle(cozmo.robot.MAX_HEAD_ANGLE).wait_for_completed()
                 face_event = robot.world.wait_for(cozmo.faces.EvtFaceObserved, timeout=5)
                 print("Face found %s" %face_event.face.face_id)
                 if not(face_event.face.face_id in faces_memory) :
                     robot.say_text("Hi").wait_for_completed()
-                    faces_memory.append(face_event.face.face_id)
+                    faces_memory.append(face_event.face.face_id) #the face id of the person is added into the empty list
                 
             except asyncio.TimeoutError :
-                print("Not found any new face")
+                print("Not found any new face") 
                 
         else :
             
             try :
-                print ("Do faces detection")
+                print ("Do faces detection") 
                 robot.set_head_angle(cozmo.robot.MAX_HEAD_ANGLE).wait_for_completed()
                 face_event = robot.world.wait_for(cozmo.faces.EvtFaceObserved, timeout=5)
                 print("Face found %s" %face_event.face.face_id)
@@ -64,8 +65,8 @@ def cozmo_program(robot: cozmo.robot.Robot) :
             #print ("event = %s" % event)
             nav_map = event.nav_memory_map
 
-            _posX = robot.pose.position.x
-            _posY = robot.pose.position.y
+            _posX = robot.pose.position.x #x position
+            _posY = robot.pose.position.y #y position
             anglez = str(robot.pose.rotation.angle_z)
             atemp = anglez.split("(")
             atemp2 = atemp[1].split(" degree")
@@ -92,11 +93,12 @@ def cozmo_program(robot: cozmo.robot.Robot) :
         #robot.go_to_pose(Pose(100, 100, 0, angle_z=degrees(deg)), relative_to_robot=False).wait_for_completed()
 
 
-def scan_block (posx, posy, angle, nav_map) :
-    posx = int(posx)
-    posy = int(posy)
-    state = [0,0,0]
+def scan_block (posx, posy, angle, nav_map) : #
+    posx = int(posx) #x position
+    posy = int(posy) #y position
+    state = [0,0,0] #state is a list with three elements; will determine if cozmo is in front of an obstacle or not
     sampling = 7
+    #the following code is to see in which direction/angle cozmo is turened in to scan the block in front of it
     if (angle >= 0 and angle <23) or (angle < 0 and angle > -23) :
         for i in range(posx, posx + 150, sampling) :
            for j in range(posy-25, posy+25, sampling) :
@@ -155,16 +157,16 @@ def scan_block (posx, posy, angle, nav_map) :
                content = str(nav_map.get_content(i,j))
                state[convert_content(content)] += 1
     print(state)
-    return state
+    return state #function returns the state cozmo is in
 
 
     
-def convert_content (content) :
+def convert_content (content) : #to decide whether cozmo should turn or go straight
     if(content == "NodeContentTypes.ClearOfObstacle" or content == "NodeContentTypes.ClearOfCliff") :
-        return 1
+        return 1 #NO OBSTACLE BLOCK IS GREEN
     elif(content == "NodeContentTypes.Unknown") :
-        return 0
+        return 0 #NOT SURE OF THE STATE
     else :
-        return 2
+        return 2 #THERE IS AN OBSTACLE
     
 cozmo.run_program(cozmo_program, use_3d_viewer=True, use_viewer=True)

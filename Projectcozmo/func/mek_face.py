@@ -1,5 +1,5 @@
 class FaceCheckCozmo:
-    '''STATUS USE IN FACE_RECOGNITION'''
+    #STATUS USE IN FACE_RECOGNITION
 
     def __init__(self, "portal"):
         self."portal" = "portal"
@@ -40,10 +40,12 @@ def did_occur_recently(event_time, max_elapsed_time):
     return elapsed_time < max_elapsed_time
 
 
+#determine the visible face whether it's owner or intruder
 async def check_for_intruder(robot, fcc:FaceCheckCozmo):
     
     owner_face = None
     intruder_face = None
+    #check and continue to further
     for visible_face in robot.world.visible_faces:
         if visible_face.name == fcc.owner_name:
             if owner_face:
@@ -98,7 +100,7 @@ async def check_for_intruder(robot, fcc:FaceCheckCozmo):
             
             robot.set_all_backpack_lights(cozmo.lights.red_light)
 
-            
+    #Finc of sending the image        
             if not did_occur_recently(fcc.time_last_uploaded_photo, 15.0):
                 
                 latest_image = robot.world.latest_image
