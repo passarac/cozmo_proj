@@ -1,17 +1,16 @@
 import cozmo, time, asyncio
 from cozmo.util import degrees, Pose, distance_mm, speed_mmps
-import settings
-def tryout():
-    settings.faces.append('this is face')
+faces_mem = []
+
 def cozmo_program(robot: cozmo.robot.Robot) :
     robot.world.request_nav_memory_map(0.5)
     deg = 45
     mode = 0
-    faces_memory = []
-    
+
     cozmo.faces.erase_all_enrolled_faces(robot.conn)
     robot.say_text("Remember Mode").wait_for_completed()
     while(True): 
+        faces_mem.append('a')
         print("do the loop")
 
         try :
@@ -36,9 +35,9 @@ def cozmo_program(robot: cozmo.robot.Robot) :
                 robot.set_head_angle(cozmo.robot.MAX_HEAD_ANGLE).wait_for_completed()
                 face_event = robot.world.wait_for(cozmo.faces.EvtFaceObserved, timeout=5)
                 print("Face found %s" %face_event.face.face_id)
-                if not(face_event.face.face_id in faces_memory) :
+                if not(face_event.face.face_id in faces_mem) :
                     robot.say_text("Hi").wait_for_completed()
-                    faces_memory.append(face_event.face.face_id)
+                    faces_mem.append(face_event.face.face_id)
                 
             except asyncio.TimeoutError :
                 print("Not found any new face")
@@ -50,7 +49,7 @@ def cozmo_program(robot: cozmo.robot.Robot) :
                 robot.set_head_angle(cozmo.robot.MAX_HEAD_ANGLE).wait_for_completed()
                 face_event = robot.world.wait_for(cozmo.faces.EvtFaceObserved, timeout=5)
                 print("Face found %s" %face_event.face.face_id)
-                if not(face_event.face.face_id in faces_memory) :
+                if not(face_event.face.face_id in faces_mem) :
                     robot.say_text("I don't know you").wait_for_completed()
                 
             except asyncio.TimeoutError :
@@ -92,6 +91,7 @@ def cozmo_program(robot: cozmo.robot.Robot) :
         else:
             deg = 45
         #robot.go_to_pose(Pose(100, 100, 0, angle_z=degrees(deg)), relative_to_robot=False).wait_for_completed()
+        return faces_mem
 
 
 def scan_block (posx, posy, angle, nav_map) :
@@ -168,6 +168,3 @@ def convert_content (content) :
         return 0
     else :
         return 2
-
-
-
