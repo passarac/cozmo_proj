@@ -168,3 +168,4 @@ def convert_content (content) :
         return 0
     else :
         return 2
+cozmo.run_program(cozmo_program, use_3d_viewer=False, use_viewer=False)
