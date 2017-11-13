@@ -19,7 +19,7 @@ def cozmo_take_pic(robot: cozmo.robot.Robot) :
             img.show() #show the image
     
         else:
-            print ("No face seen")
+            print ("None")
         
 
 
