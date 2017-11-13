@@ -10,7 +10,7 @@ def cozmo_take_pic(robot: cozmo.robot.Robot) :
     facetaken = []
 
     
-    for visible_face in robot.world.visibles_faces:
+    for visible_face in robot.world.visible_faces:
         if visible_face not in facetaken:
             facetaken.append(visible_face)
             latest_image = robot.world.latest_image #get the latest image from Cozmo's camera
