@@ -4,7 +4,7 @@ from cozmo.util import degrees, Pose, distance_mm, speed_mmps
 from PIL import Image
 cwd = os.getcwd()
 num= 1
-
+take_pic = 0
 
 #############################################################################################################################################
 
@@ -30,6 +30,10 @@ def inside_conference(robot: cozmo.robot.Robot) :
                 name_of_face = face_event.face.name
                 if name_of_face == '':
                     cozmo_take_pic_conference(robot)
+                    robot.say_text("beep beep").wait_for_completed()
+                    robot.say_text("beep beep").wait_for_completed()
+                    robot.say_text("beep beep").wait_for_completed()
+                    robot.say_text("beep beep").wait_for_completed()
                 ###
             
                 robot.turn_in_place(degrees(90)).wait_for_completed() #turns 90 degrees
@@ -128,8 +132,10 @@ def inside_conference(robot: cozmo.robot.Robot) :
 
 def remember_face(robot: cozmo.robot.Robot):
     faces = []
+    names = []
     with open('/Users/passara/Desktop/face_id_s.txt',"r+") as file:
         readin = file.read().split(" ")
+        
     for face_id in readin:
         faces.append(face_id)
         
@@ -149,20 +155,25 @@ def remember_face(robot: cozmo.robot.Robot):
                 faces.append(str(face_id)) #face id of the person is added to the empty list above
                 faceName = input("enter name   ")
                 face_event.face.name_face(faceName)
-                print ("name:", faceName)
+                print ("name = ", faceName)
                 print("hi")
-                
+            
             else:
-                print(face_event.face.name)
-                cozmo_take_pic(robot,face_event.face.name) #cozmo then takes a picture
-                print (faces) #prints face id inside the list
-
+                global take_pic
+                if take_pic ==0:
+                   print(face_event.face.name)
+                   cozmo_take_pic_remember(robot,face_event.face.name) #cozmo then takes a picture
+                   print (faces) #prints face id inside the list
+                   take_pic+=1
+            
 
         except asyncio.TimeoutError : #in the case that cozmo does not find a face
             print("New face not found") #prints "new face not found"
                 
             robot.set_all_backpack_lights(cozmo.lights.red_light)
             robot.set_all_backpack_lights(cozmo.lights.off_light)
+            
+
 
 ############################################################################################################################################            
 
@@ -197,7 +208,7 @@ def erase_all(robot: cozmo.robot.Robot):
 ############################################################################################################################################
 
 
-
+#cozmo.run_program(erase_all, use_viewer=True)
 #cozmo.run_program(remember_face, use_viewer=True)
 cozmo.run_program(inside_conference, use_viewer=True)
 
