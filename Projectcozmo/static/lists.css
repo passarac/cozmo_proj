@@ -1,0 +1,29 @@
+body {
+    background-color:rgb(245, 240, 240);
+}
+h2 {
+    color: white;
+}
+fieldset{
+    color: white;
+}
+p {
+    color: rgb(36, 34, 35);
+}
+
+div.square1 {
+    border: dashed 3px black;
+    margin: 0 auto;
+}
+article {
+    margin-left: 170px;
+    border-left: 1px solid gray;
+    padding: 1em;
+    overflow: hidden;
+}
+box{
+    background-color:rgb(99, 22, 22);
+    height:200px;
+    width:350px;
+    float:left;
+}

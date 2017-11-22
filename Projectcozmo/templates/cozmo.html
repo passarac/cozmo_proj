@@ -7,7 +7,12 @@
     <link type="text/css" rel="stylesheet" href="/static/style.css" />
   </head>
   <body>
-    <h2><center>Cozmo Security Guard</center></h2>
+    <h2><center>&ensp;Cozmo Security Guard</center></h2>
+    <h3>Key: sent_pic = {'pic','picture','photo','photoes'}
+      sent_lo  = {'location','locate',}
+      add_pe = {'people','add','add people'}
+      operate = {'operation', 'operate'}
+      reset = {'reset'}</h3>
     <ul>
       <div class = "square1">
       {% for message in message1 %}
@@ -15,11 +20,11 @@
       <br/>
         {% for split1 in message.split(' ')%}
             {% if split1 in sent_pic%}    
-                Cozmo: Here is picture <!--function that return picture-->
-                <br/>   
+                <p align="right">Cozmo: Here is picture </p> <!--function that return picture-->
             {% elif split1 in sent_lo%}
-                Cozmo: Here is location <!--function that return location-->
-                <br/>       
+                <p align="right">Cozmo: Here is location </p> <!--function that return location-->    
+            {% elif split1 in sent_lo%}
+                <p align="right">Cozmo: Here is location    
             {% endif%}     
         {% endfor %}
      {% endfor %}
@@ -37,7 +42,10 @@
 
         <div>
             <center><button type="submit"> Send </button></center>
-        </div> 
+        </div class = "w3-container w3-teal">
+      <form>
+         <input type="button" value="Go to List" onclick="window.location.href='/list'" />
+      </form>   
     </ul>
   </body>
 </html>

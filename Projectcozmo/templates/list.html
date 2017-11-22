@@ -1,36 +1,42 @@
-<<<<<<< HEAD
 
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>List</title>
-    <link type="text/css" rel="stylesheet" href="/static/liststyle.css" />
+    <link type="text/css" rel="stylesheet" href="/static/lists.css" />
   </head>
   <body>
-    <h2>Hello {{name}}, Welcome to my store!</h2>
+    <h2>Participants</h2>
     <ul>
-    	{% for item in items %}
-    	<li>{{item.name}} Price: {{item.price}}</li>
-    	{% endfor %}
-    </ul>
-  </body>
-=======
+      <div class='box'>
+         participant
+       </div>  
+      <aside></aside> 
+       
+      {% for pic in listpic  %}
+      <p>
+          <a href="/upload/{{pic}}"><img src='upload/{{pic}}' height="42" width="42"></a>
+          {{pic.split('.')[0]}}
+      </p>
+      {% endfor %}
+      </aside> 
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>List</title>
-    <link type="text/css" rel="stylesheet" href="/static/liststyle.css" />
-  </head>
-  <body>
-    <h2>Hello {{name}}, Welcome to my store!</h2>
-    <ul>
-    	{% for item in items %}
-    	<li>{{item.name}} Price: {{item.price}}</li>
-    	{% endfor %}
+
+      <div class='box'>
+        unknowm
+      </div>  
+      {% for un in unknown   %}
+      <p>
+          <a href="/up/{{un}}"><img src='up/{{un}}'  height="42" width="42"></a>
+          {{un.split('.')[0]}}
+      </p>
+      {% endfor %}
+  
+
     </ul>
+    <form>
+      <input type="button" value="back" onclick="window.location.href='/'" />
+    </form>  
   </body>
->>>>>>> a0a5fd3721a921ef9533420b3f12367e267d2fc1
 </html>

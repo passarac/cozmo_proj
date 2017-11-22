@@ -1,1 +1,0 @@
-this folder contains functions that cozmo does
