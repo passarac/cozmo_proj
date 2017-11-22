@@ -7,11 +7,22 @@
     <link type="text/css" rel="stylesheet" href="/static/lists.css" />
   </head>
   <body>
-    <h2>Hello {{name}}, Welcome to my store!</h2>
+    <h2>Participants</h2>
     <ul>
-    	{% for face in fa  %}
-    	<li> Person name: {{face}}</li>
-    	{% endfor %}
+      <div class='box'>
+         ei
+       </div>  
+      <aside></aside> 
+       
+      {% for pic in listpic  %}
+      <p>
+          <a href="/uploads/{{pic}}"><img src='uploads/{{pic}}' alt="Smiley face" height="42" width="42"></a>
+          {{pic.split('.')[0]}}
+      </p>
+      {% endfor %}
+      </aside>
+
+
     </ul>
     <form>
       <input type="button" value="back" onclick="window.location.href='/'" />
