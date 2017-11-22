@@ -19,7 +19,7 @@ def cozmo_program(robot: cozmo.robot.Robot) :
             _angle = float(atemp2[0])
             
             print("Robot info : x="+str(_posX)+" y="+str(_posY)+" angle="+str(_angle)) 
-            state = scan_block(_posX, _posY, _angle, nav_map) .#to find the state cozmo is in using the coordinates and angle/ direction cozmo is facing
+            state = scan_block(_posX, _posY, _angle, nav_map) #to find the state cozmo is in using the coordinates and angle/ direction cozmo is facing
             #state = scan_block_test(-40.29963302612305, -199.53224182128906, -87.09, nav_map)
             if state[2] > 4: #check whether there is an obstacle in front of it or not
                 robot.turn_in_place(degrees(45)).wait_for_completed() #turn if there is an obstacle
@@ -115,4 +115,4 @@ def convert_content (content) :
     else :
         return 2 #there is an obstacle (color is yellow/ orange)
     
-cozmo.run_program(cozmo_program, use_3d_viewer=True, use_viewer=True) #lolol
+cozmo.run_program(cozmo_program, use_3d_viewer=False, use_viewer=True) #lolol
