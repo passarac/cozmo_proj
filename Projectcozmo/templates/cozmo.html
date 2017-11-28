@@ -8,15 +8,12 @@
   </head>
   <body>
     <h2><center>&ensp;Cozmo Security Guard</center></h2>
-    <h3>Key: sent_pic = {'pic','picture','photo','photoes'}
-      sent_lo  = {'location','locate',}
-      add_pe = {'people','add','add people'}
-      operate = {'operation', 'operate'}
-      reset = {'reset'}</h3>
-    <ul>
+    <h3><center> Key | sent picture : pic, picture, photo, photoes | add people : add [name] | Operation : operate | Reset Cozmo : reset | end program : kill |
+    </center>
+      <ul>
       <div class = "square1">
       {% for message in message1 %}
-      You: {{message}}
+      command: {{message}}
       <br/>
         {% for split1 in message.split(' ')%}
             {% if split1 in sent_pic%}    

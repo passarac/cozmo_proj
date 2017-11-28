@@ -2,8 +2,13 @@ body {
     background-color:rgb(245, 240, 240);
 }
 h2 {
-    color: white;
+    color: rgb(112, 85, 85);
 }
+h3 {
+    color: rgb(235, 180, 85)
+}
+h1 {
+    color: rgb(179, 41, 41)}
 fieldset{
     color: white;
 }

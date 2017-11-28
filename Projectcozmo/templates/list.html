@@ -10,26 +10,26 @@
     <h2>Participants</h2>
     <ul>
       <div class='box'>
-         participant
+         <h3>participant</h3>
        </div>  
       <aside></aside> 
        
       {% for pic in listpic  %}
       <p>
-          <a href="/upload/{{pic}}"><img src='upload/{{pic}}' height="42" width="42"></a>
-          {{pic.split('.')[0]}}
+          <a href="/upload/{{pic}}"><img src='upload/{{pic}}' height="70" width="70"></a>
+          &emsp; {{pic.split('.')[0]}}
       </p>
       {% endfor %}
       </aside> 
 
 
       <div class='box'>
-        unknowm
+      <h1>unknown</h1>
       </div>  
       {% for un in unknown   %}
       <p>
-          <a href="/up/{{un}}"><img src='up/{{un}}'  height="42" width="42"></a>
-          {{un.split('.')[0]}}
+          <a href="/up/{{un}}"><img src='up/{{un}}'  height="70" width="70"></a>
+          &emsp; {{un.split('.')[0]}}
       </p>
       {% endfor %}
   

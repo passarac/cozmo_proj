@@ -5,7 +5,7 @@ from PIL import Image
 cwd = os.getcwd()
 num= 1
 take_pic = 0
-faces = {}
+faces = []
 names = []
 
 #############################################################################################################################################
@@ -134,12 +134,18 @@ def inside_conference(robot: cozmo.robot.Robot) :
 
 def remember_face(robot: cozmo.robot.Robot):
 
-    with open('C:/Users/PAWEE/Desktop/Cozmo-101-master/Projectcozmo/face_id_s.txt',"r+") as file:
+    with open('C:/Users/PAWEE/Desktop/COZMO-try/Projectcozmo/face_id_s.txt',"r+") as file:
         readin = file.read().split(" ")
         
-    for face_id in readin:
-        faces.append(face_id)
+    for inform in readin:
+        faces.append(inform)
+
+    with open('C:/Users/PAWEE/Desktop/COZMO-try/Projectcozmo/name_peo.txt',"r+") as file:
+         my_name = file.read().split(' ')
         
+    for name in my_name:
+         names.append(name)
+
     while True:
         robot.set_head_angle(cozmo.robot.MAX_HEAD_ANGLE).wait_for_completed()
         try:
@@ -149,12 +155,14 @@ def remember_face(robot: cozmo.robot.Robot):
             robot.set_all_backpack_lights(cozmo.lights.green_light)
             
             face_id = face_event.face.face_id #gets the face id of the person
+            print(faces)
             if not (str(face_id) in faces) :
-                with open('C:/Users/PAWEE/Desktop/Cozmo-101-master/Projectcozmo/face_id_s.txt',"a+") as file:
-                    lines = file.write(str(face_id)+' ')
-    
+                    
+                with open('C:/Users/PAWEE/Desktop/COZMO-try/Projectcozmo/face_id_s.txt',"a+") as file:
+                    lines = file.write(str(face_id)+" ")
+                #faceName = read_name.split(" ")[-1]    
                 faces.append(str(face_id)) #face id of the person is added to the empty list above
-                faceName = input("enter name   ")
+                faceName = names[-2]
                 face_event.face.name_face(faceName)
                 print ("name = ", faceName)
                 print("hi")
