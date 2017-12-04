@@ -22,13 +22,22 @@ def inside_conference(robot: cozmo.robot.Robot) :
             robot.set_head_angle(cozmo.robot.MAX_HEAD_ANGLE).wait_for_completed() #robot lifts head to max head angle
         
             try:
-                face_event = robot.world.wait_for(cozmo.faces.EvtFaceObserved, timeout=6) #tries to find the face for 6 secs
-                print ("Face found") #prints "face found"
-                robot.set_all_backpack_lights(cozmo.lights.green_light)
+                i=0
+                check = False
+                while i < 10:
+                 face_event = robot.world.wait_for(cozmo.faces.EvtFaceObserved, timeout=2) #tries to find the face for 6 secs
+                 print ("Face found") #prints "face found"
+                 robot.set_all_backpack_lights(cozmo.lights.green_light)
 
-                ###
-                name_of_face = face_event.face.name
-                if name_of_face == '':
+                 ###
+                 name_of_face = face_event.face.name
+                 if name_of_face == '':
+                    i+=1
+                 else:
+                     check = True
+                     break
+                
+                if name_of_face == '' and check == False:
                     cozmo_take_pic_conference(robot)
                     robot.say_text("beep beep").wait_for_completed()
                     robot.say_text("beep beep").wait_for_completed()
@@ -50,13 +59,26 @@ def inside_conference(robot: cozmo.robot.Robot) :
                 robot.set_all_backpack_lights(cozmo.lights.off_light)
             
             try:
-                face_event = robot.world.wait_for(cozmo.faces.EvtFaceObserved, timeout=6) #tries to find the face for 6 seconds
-                print ("Face found") #print "face found"
-                robot.set_all_backpack_lights(cozmo.lights.green_light)
+                i=0
+                check = False
+                while i < 10:
+                 face_event = robot.world.wait_for(cozmo.faces.EvtFaceObserved, timeout=2) #tries to find the face for 6 secs
+                 print ("Face found") #prints "face found"
+                 robot.set_all_backpack_lights(cozmo.lights.green_light)
 
-                ###
-                name_of_face = face_event.face.name
-                if name_of_face == '':
+                 ###
+                 name_of_face = face_event.face.name
+                 if name_of_face == '':
+                    i+=1
+                 else:
+                     check = True
+                     break
+                
+                if name_of_face == '' and check == False:
+                    robot.say_text("beep beep").wait_for_completed()
+                    robot.say_text("beep beep").wait_for_completed()
+                    robot.say_text("beep beep").wait_for_completed()
+                    robot.say_text("beep beep").wait_for_completed()
                     cozmo_take_pic_conference(robot)
                 ###
 
@@ -88,16 +110,29 @@ def inside_conference(robot: cozmo.robot.Robot) :
             robot.set_head_angle(cozmo.robot.MAX_HEAD_ANGLE).wait_for_completed() #robot lifts head to max head angle
         
             try:
-                face_event = robot.world.wait_for(cozmo.faces.EvtFaceObserved, timeout=6) #tries to find the face for 6 secs
-                print ("Face found") #prints "face found"
-                robot.set_all_backpack_lights(cozmo.lights.green_light)
+                i=0
+                check = False
+                while i < 10:
+                 face_event = robot.world.wait_for(cozmo.faces.EvtFaceObserved, timeout=2) #tries to find the face for 6 secs
+                 print ("Face found") #prints "face found"
+                 robot.set_all_backpack_lights(cozmo.lights.green_light)
 
-                ###
-                name_of_face = face_event.face.name
-                if name_of_face == '':
+                 ###
+                 name_of_face = face_event.face.name
+                 if name_of_face == '':
+                    i+=1
+                 else:
+                     check = True
+                     break
+                
+                if name_of_face == '' and check == False:
                     cozmo_take_pic_conference()
+                    robot.say_text("beep beep").wait_for_completed()
+                    robot.say_text("beep beep").wait_for_completed()
+                    robot.say_text("beep beep").wait_for_completed()
+                    robot.say_text("beep beep").wait_for_completed()
                 ###
-            
+             
                 robot.turn_in_place(degrees(90)).wait_for_completed() #turns 90 degrees
                 robot.turn_in_place(degrees(90)).wait_for_completed() #turns 90 degrees to face the other side
 
@@ -109,14 +144,27 @@ def inside_conference(robot: cozmo.robot.Robot) :
                 robot.turn_in_place(degrees(90)).wait_for_completed() #turns 90 degrees to face the other side
             
             try:
-                face_event = robot.world.wait_for(cozmo.faces.EvtFaceObserved, timeout=6) #tries to find the face for 6 seconds
-                print ("Face found") #print "face found"
-                robot.set_all_backpack_lights(cozmo.lights.green_light)
-    
-                ###
-                name_of_face = face_event.face.name
-                if name_of_face == '':
+                i=0
+                check = False
+                while i < 10:
+                 face_event = robot.world.wait_for(cozmo.faces.EvtFaceObserved, timeout=2) #tries to find the face for 6 secs
+                 print ("Face found") #prints "face found"
+                 robot.set_all_backpack_lights(cozmo.lights.green_light)
+
+                 ###
+                 name_of_face = face_event.face.name
+                 if name_of_face == '':
+                    i+=1
+                 else:
+                     check = True
+                     break
+                
+                if name_of_face == '' and check == False:
                     cozmo_take_pic_conference()
+                    robot.say_text("beep beep").wait_for_completed()
+                    robot.say_text("beep beep").wait_for_completed()
+                    robot.say_text("beep beep").wait_for_completed()
+                    robot.say_text("beep beep").wait_for_completed()
                 ###
             
                 robot.turn_in_place(degrees(90)).wait_for_completed() #turns 90 degrees to initial position to keep walking
@@ -142,7 +190,7 @@ def remember_face(robot: cozmo.robot.Robot):
     while True:
         robot.set_head_angle(cozmo.robot.MAX_HEAD_ANGLE).wait_for_completed()
         try:
-            face_event = robot.world.wait_for(cozmo.faces.EvtFaceObserved, timeout=6) #tries to find the face for 6 secs
+            face_event = robot.world.wait_for(cozmo.faces.EvtFaceObserved, timeout=10) #tries to find the face for 6 secs
             print ("Face found") #prints "face found"
             
             robot.set_all_backpack_lights(cozmo.lights.green_light)
